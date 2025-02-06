@@ -63,7 +63,7 @@
                 </div>
                 <div class="mb-3">
                     <label class="form-label fw-bold">Please choose department</label>
-                    <select asp-for="Employee.DepartmentId"></select>
+                    <select asp-for="Employee.DepartmentId" asp-items="ViewBag.Departments"></select>
                 </div>
                 <div class="mb-3">
                     <div class="form-check">
