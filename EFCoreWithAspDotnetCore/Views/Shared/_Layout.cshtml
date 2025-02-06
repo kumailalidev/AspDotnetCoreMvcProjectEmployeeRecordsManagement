@@ -5,12 +5,17 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - EFCoreWithAspDotnetCore</title>
+
+    @* Bootstrap *@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/EFCoreWithAspDotnetCore.styles.css" asp-append-version="true" />
 </head>
 
 <body>
+
     <div class="container-fluid">
         <div class="row flex-nowrap">
             <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
@@ -23,14 +28,13 @@
                         id="menu">
                         <li class="nav-item">
                             <a asp-controller="Home" asp-action="Index" class="nav-link align-middle px-0 text-white">
-                                <i class="fs-4 bi bi-house-door-fill"></i> <span
-                                    class="ms-1 d-none d-sm-inline">Home</span>
+                                <i class="fs-4 bi bi-house-fill"></i><span class="ms-1 d-none d-sm-inline">Home</span>
                             </a>
                         </li>
 
                         <li>
                             <a href="#submenu1" data-bs-toggle="collapse" class="nav-link px-0 align-middle text-white">
-                                <i class="fs-4 bi bi-people-fill"></i> <span
+                                <i class="fs-4 bi bi-people-fill"></i><span
                                     class="ms-1 d-none d-sm-inline">Employees</span>
                             </a>
                             <ul class="collapse show nav flex-column ms-1" id="submenu1" data-bs-parent="#menu">
@@ -39,15 +43,15 @@
                                         List all</a>
                                 </li>
                                 <li>
-                                    <a asp-controller="Employee" asp-action="Add" class="nav-link px-0 text-white"> Add
-                                        employee </a>
+                                    <a asp-controller="Employee" asp-action="Add" class="nav-link px-0 text-white">
+                                        Add employee </a>
                                 </li>
                             </ul>
                         </li>
 
                         <li>
                             <a href="#submenu2" data-bs-toggle="collapse" class="nav-link px-0 align-middle text-white">
-                                <i class="fs-4 bi bi-people-fill"></i> <span
+                                <i class="fs-4 bi bi-building-fill-gear"></i><span
                                     class="ms-1 d-none d-sm-inline">Department</span>
                             </a>
                             <ul class="collapse show nav flex-column ms-1" id="submenu2" data-bs-parent="#menu">
@@ -71,6 +75,7 @@
             </div>
         </div>
     </div>
+
 
     <footer class="border-top footer text-muted">
         <div class="container">
