@@ -1,5 +1,7 @@
 using System;
 
+using EFCoreWithAspDotnetCore.ViewModels;
+
 using Microsoft.AspNetCore.Mvc;
 
 namespace EFCoreWithAspDotnetCore.Controllers
@@ -17,9 +19,7 @@ namespace EFCoreWithAspDotnetCore.Controllers
         }
 
         [HttpPost] // Handles HTTP POST method
-        public IActionResult Add(string name)
-        // Parameter names are same as the value of attribute 'name' of input field
-        // Case insensitive
+        public IActionResult Add(DepartmentViewModel model)
         {
             return View();
         }
