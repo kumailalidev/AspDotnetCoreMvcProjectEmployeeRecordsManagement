@@ -34,6 +34,9 @@ namespace EFCoreWithAspDotnetCore.Controllers
         [HttpPost] // Handles HTTP POST method: POST Employee/Add
         public IActionResult Add(EmployeeViewModel model)
         {
+            if (!ModelState.IsValid) // Server-side validation
+                return View(); // Return to Employee/Add with validation errors
+
             return View();
         }
     }

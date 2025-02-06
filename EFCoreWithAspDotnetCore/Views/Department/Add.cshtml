@@ -16,7 +16,7 @@
                 <div class="mb-3">
                     <label for="Name" class="form-label fw-bold">Department Name</label>
                     <input asp-for="Name" type="text" class="form-control">
-                    <span class="text-danger"></span>
+                    <span asp-validation-for="Name" class="text-danger"></span>
                 </div>
                 <button type="submit" class="btn btn-dark">Submit</button>
             </form>

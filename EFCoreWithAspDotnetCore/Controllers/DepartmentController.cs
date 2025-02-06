@@ -21,6 +21,9 @@ namespace EFCoreWithAspDotnetCore.Controllers
         [HttpPost] // Handles HTTP POST method
         public IActionResult Add(DepartmentViewModel model)
         {
+            if (!ModelState.IsValid) // Server-side validation
+                return View(model); // Return to view with validation errors
+
             return View();
         }
     }
