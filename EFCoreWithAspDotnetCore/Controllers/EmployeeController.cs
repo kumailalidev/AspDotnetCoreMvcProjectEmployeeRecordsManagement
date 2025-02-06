@@ -1,5 +1,7 @@
 using System;
 
+using EFCoreWithAspDotnetCore.ViewModels;
+
 using Microsoft.AspNetCore.Mvc;
 
 namespace EFCoreWithAspDotnetCore.Controllers
@@ -18,9 +20,7 @@ namespace EFCoreWithAspDotnetCore.Controllers
         }
 
         [HttpPost] // Handles HTTP POST method: POST Employee/Add
-        public IActionResult Add(string firstName, string lastName)
-        // Parameter names are same as the value of attribute 'name' of input field
-        // Case insensitive
+        public IActionResult Add(EmployeeViewModel model)
         {
             return View();
         }
