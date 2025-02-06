@@ -3,7 +3,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace EFCoreWithAspDotnetCore.Models
 {
-    public class Employee // Each property is a column in database table
+    // Employee is an domain class or entity class and involved in database operations
+    // Each property is a column in database table
+    public class Employee
     {
         public int EmployeeId { get; set; } // EF Core assumes Id or {ClassName}Id as PK
         public string FirstName { get; set; }
