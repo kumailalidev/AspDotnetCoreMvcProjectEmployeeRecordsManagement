@@ -18,9 +18,11 @@ namespace EFCoreWithAspDotnetCore.Controllers
             _employeeRepository = employeeRepository;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            // Get all the employees from database
+            List<EmployeeViewModel> employees = await _employeeRepository.GetAllAsync();
+            return View(employees);
         }
 
         // Handles HTTP GET method: GET Employee/Add

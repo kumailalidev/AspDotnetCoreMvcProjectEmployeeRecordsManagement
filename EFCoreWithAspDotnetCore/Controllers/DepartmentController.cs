@@ -16,9 +16,10 @@ namespace EFCoreWithAspDotnetCore.Controllers
             _departmentRepository = departmentRepository;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            List<DepartmentViewModel> departments = await _departmentRepository.GetAllAsync();
+            return View(departments);
         }
 
         public IActionResult Add()

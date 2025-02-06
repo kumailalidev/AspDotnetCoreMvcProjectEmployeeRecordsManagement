@@ -46,9 +46,34 @@ namespace EFCoreWithAspDotnetCore.Repositories
             await _dbContext.SaveChangesAsync();
         }
 
-        public async Task<List<Employee>> GetAllAsync()
+        public async Task<List<EmployeeViewModel>> GetAllAsync()
         {
-            return await _dbContext.Employees.ToListAsync();
+            List<Employee> employees = await _dbContext.Employees.ToListAsync();
+            List<EmployeeViewModel> employeeViewModels = new List<EmployeeViewModel>();
+
+            // Perform mapping
+            foreach (var employee in employees)
+            {
+                var employeeViewModel = new EmployeeViewModel
+                {
+                    EmployeeId = employee.EmployeeId,
+                    FirstName = employee.FirstName,
+                    LastName = employee.LastName,
+                    DateOfBirth = employee.DateOfBirth,
+                    PhoneNumber = employee.PhoneNumber,
+                    Gender = employee.Gender,
+                    Email = employee.Email,
+                    Address = employee.Address,
+                    IsActive = employee.IsActive,
+                    DepartmentId = employee.DepartmentId
+                    // Department is an navigation property therefore doesn't require to be set
+                };
+
+                // Add to list
+                employeeViewModels.Add(employeeViewModel);
+            }
+
+            return employeeViewModels;
         }
 
         public async Task<Employee> GetByIdAsync(int id)
