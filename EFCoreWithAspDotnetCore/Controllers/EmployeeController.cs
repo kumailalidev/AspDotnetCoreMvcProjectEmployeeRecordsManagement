@@ -15,5 +15,13 @@ namespace EFCoreWithAspDotnetCore.Controllers
         {
             return View();
         }
+
+        [HttpPost] // Handles HTTP POST method
+        public IActionResult Add(string firstName, string lastName)
+        // Parameter names are same as the value of attribute 'name' of input field
+        // Case insensitive
+        {
+            return View();
+        }
     }
 }

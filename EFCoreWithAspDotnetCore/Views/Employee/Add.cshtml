@@ -10,14 +10,16 @@
     </div>
     <div class="row p-4">
         <div class="col-md-6">
-            <form action="">
+            @*Add action method will handle the form submission, specifying method attribute is
+            important otherwise form will use get method (security flaws)*@
+            <form asp-controller="Employee" asp-action="Add" method="post">
                 <div class="mb-3">
                     <label for="FirstName" class="form-label fw-bold">First Name</label>
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control" name="firstnamee">
                 </div>
                 <div class="mb-3">
                     <label for="LastName" class="form-label fw-bold">Last Name</label>
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control" name="lastnamee">
                 </div>
                 <div class="mb-3">
                     <label for="datetimepicker" class="form-label fw-bold">Date of Birth</label>
