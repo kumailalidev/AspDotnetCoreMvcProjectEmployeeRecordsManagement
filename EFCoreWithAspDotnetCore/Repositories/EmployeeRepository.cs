@@ -2,7 +2,9 @@ using System;
 
 using EFCoreWithAspDotnetCore.Data;
 using EFCoreWithAspDotnetCore.Models;
+using EFCoreWithAspDotnetCore.ViewModels;
 
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace EFCoreWithAspDotnetCore.Repositories
@@ -16,9 +18,22 @@ namespace EFCoreWithAspDotnetCore.Repositories
             _dbContext = dbContext; // Constructor dependency injection
         }
 
-        public async Task AddAsync(Employee employee)
+        public async Task AddAsync(EmployeeViewModel employee)
         {
-            await _dbContext.Employees.AddAsync(employee);
+            Employee newEmployee = new()
+            {
+                FirstName = employee.FirstName,
+                LastName = employee.LastName,
+                DateOfBirth = employee.DateOfBirth,
+                PhoneNumber = employee.PhoneNumber,
+                Gender = employee.Gender,
+                Email = employee.Email,
+                Address = employee.Address,
+                IsActive = employee.IsActive,
+                DepartmentId = employee.DepartmentId
+                // Department is an navigation property therefore doesn't require to be set
+            };
+            await _dbContext.Employees.AddAsync(newEmployee);
 
             await _dbContext.SaveChangesAsync();
         }
@@ -54,5 +69,9 @@ namespace EFCoreWithAspDotnetCore.Repositories
             _dbContext.Employees.Update(employee);
             await _dbContext.SaveChangesAsync();
         }
+
+        public async Task<List<Department>> GetAllDepartmentsAsync() =>
+            // Using getting all the departments
+            await _dbContext.Departments.ToListAsync();
     }
 }

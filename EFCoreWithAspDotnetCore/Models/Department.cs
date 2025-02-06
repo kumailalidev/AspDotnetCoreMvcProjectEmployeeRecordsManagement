@@ -4,7 +4,7 @@ namespace EFCoreWithAspDotnetCore.Models
 {
     public class Department
     {
-        public int DepartmentId { get; set; } // EF Core assumes Id or {ClassName}Id as PK
+        public int DepartmentId { get; set; } // EF Core assumes Id or {ClassName}Id as PK and is automatically generated
         public string Name { get; set; }
 
         // Relationship with Employees

@@ -1,6 +1,7 @@
 using System;
 
 using EFCoreWithAspDotnetCore.Models;
+using EFCoreWithAspDotnetCore.Repositories;
 using EFCoreWithAspDotnetCore.ViewModels;
 
 using Microsoft.AspNetCore.Mvc;
@@ -10,20 +11,23 @@ namespace EFCoreWithAspDotnetCore.Controllers
 {
     public class EmployeeController : Controller
     {
+        private readonly IEmployeeRepository _employeeRepository;
+
+        public EmployeeController(IEmployeeRepository employeeRepository)
+        {
+            _employeeRepository = employeeRepository;
+        }
+
         public IActionResult Index()
         {
             return View();
         }
 
         // Handles HTTP GET method: GET Employee/Add
-        public IActionResult Add()
+        public async Task<IActionResult> Add()
         {
-            // Department data (in-memory)
-            List<Department> departments = new List<Department>
-            {
-                new Department {DepartmentId = 1, Name = "IT"},
-                new Department {DepartmentId = 1, Name = "HR"}
-            };
+            // Department data (from database)
+            List<Department> departments = await _employeeRepository.GetAllDepartmentsAsync();
 
             // Assigning to ViewBag
             ViewBag.Departments = new SelectList(departments, "DepartmentId", "Name");
@@ -32,12 +36,15 @@ namespace EFCoreWithAspDotnetCore.Controllers
         }
 
         [HttpPost] // Handles HTTP POST method: POST Employee/Add
-        public IActionResult Add(EmployeeViewModel model)
+        public async Task<IActionResult> Add(EmployeeViewModel model)
         {
             if (!ModelState.IsValid) // Server-side validation
                 return View(); // Return to Employee/Add with validation errors
 
-            return View();
+            // Add employee to database
+            await _employeeRepository.AddAsync(model);
+
+            return RedirectToAction("Index", "Employee");
         }
     }
 }

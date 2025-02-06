@@ -1,6 +1,7 @@
 using System;
 
 using EFCoreWithAspDotnetCore.Models;
+using EFCoreWithAspDotnetCore.ViewModels;
 
 namespace EFCoreWithAspDotnetCore.Repositories
 {
@@ -8,8 +9,10 @@ namespace EFCoreWithAspDotnetCore.Repositories
     {
         Task<Employee> GetByIdAsync(int id);
         Task<List<Employee>> GetAllAsync();
-        Task AddAsync(Employee employee);
+        Task AddAsync(EmployeeViewModel employee);
         Task UpdateAsync(Employee employee);
         Task DeleteAsync(int id);
+
+        Task<List<Department>> GetAllDepartmentsAsync();
     }
 }
