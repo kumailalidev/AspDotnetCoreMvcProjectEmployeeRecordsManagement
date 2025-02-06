@@ -18,14 +18,23 @@ namespace EFCoreWithAspDotnetCore.Controllers
             _employeeRepository = employeeRepository;
         }
 
-        public async Task<IActionResult> Index()
+        [HttpGet]
+        public async Task<IActionResult> Index(string searchString)
         {
             // Get all the employees from database
             List<EmployeeViewModel> employees = await _employeeRepository.GetAllAsync();
+
+            // Filter employees by name
+            string queryString = searchString.ToLower();
+            if (!String.IsNullOrEmpty(queryString))
+                employees = employees.Where(employee => employee.FirstName.ToLower().Contains(queryString) ||
+                    employee.LastName.ToLower().Contains(queryString)).ToList();
+
             return View(employees);
         }
 
-        // Handles HTTP GET method: GET Employee/Add
+        // Handles HTTP GET method
+        // GET Employee/Add
         public async Task<IActionResult> Add()
         {
             // Department data (from database)

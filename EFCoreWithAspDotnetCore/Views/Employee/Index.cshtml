@@ -11,6 +11,16 @@
         </div>
     </div>
     <div class="row">
+        <div class="col-md-6">
+            @* Submitted as GET action method *@
+            <form class="d-flex" asp-action="Index" asp-controller="Employee" method="get">
+                <input name="searchString" class="form-control me-1" type="search"
+                    placeholder="Search by first or last name..." aria-label="Search">
+                <button class="btn btn-dark" type="submit">Search</button>
+            </form>
+        </div>
+    </div>
+    <div class="row">
         <div class="col-md-12 p-4">
             <table class="table">
                 <thead>
