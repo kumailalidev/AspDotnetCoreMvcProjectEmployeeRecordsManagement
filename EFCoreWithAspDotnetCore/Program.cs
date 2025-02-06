@@ -1,4 +1,5 @@
 using EFCoreWithAspDotnetCore.Data;
+using EFCoreWithAspDotnetCore.Repositories;
 
 using Microsoft.EntityFrameworkCore;
 
@@ -12,6 +13,10 @@ builder.Services.AddControllersWithViews();
 string connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(connectionString));
+
+// AddScoped indicates that new instance of the service will be created per each HTTP request in the web application
+builder.Services.AddScoped<IDepartmentRepository, DepartmentRepository>();
+builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
 
 // #################################
 
