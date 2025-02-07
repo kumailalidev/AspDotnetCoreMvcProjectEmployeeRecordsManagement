@@ -101,14 +101,31 @@ namespace EFCoreWithAspDotnetCore.Repositories
         //     return employeeViewModels;
         // }
 
-        public async Task<Employee> GetByIdAsync(int id)
+        public async Task<EmployeeViewModel> GetByIdAsync(int id)
         {
-            return await _dbContext.Employees.FindAsync(id);
+            var employee = await _dbContext.Employees.FindAsync(id);
+            var employeeViewModel = new EmployeeViewModel
+            {
+                EmployeeId = employee.EmployeeId,
+                FirstName = employee.FirstName,
+                LastName = employee.LastName,
+                DateOfBirth = employee.DateOfBirth,
+                PhoneNumber = employee.PhoneNumber,
+                Gender = employee.Gender,
+                Email = employee.Email,
+                Address = employee.Address,
+                IsActive = employee.IsActive,
+                DepartmentId = employee.DepartmentId
+                // Department is an navigation property therefore doesn't require to be set
+            };
+
+            return employeeViewModel;
         }
 
-        public async Task UpdateAsync(Employee updatedEmployee)
+        public async Task UpdateAsync(EmployeeViewModel updatedEmployee)
         {
             var employee = await _dbContext.Employees.FindAsync(updatedEmployee.EmployeeId);
+
             employee.FirstName = updatedEmployee.FirstName;
             employee.LastName = updatedEmployee.LastName;
             employee.Email = updatedEmployee.Email;
@@ -116,7 +133,9 @@ namespace EFCoreWithAspDotnetCore.Repositories
             employee.PhoneNumber = updatedEmployee.PhoneNumber;
             employee.Address = updatedEmployee.Address;
             employee.DepartmentId = updatedEmployee.DepartmentId;
+
             _dbContext.Employees.Update(employee);
+
             await _dbContext.SaveChangesAsync();
         }
 

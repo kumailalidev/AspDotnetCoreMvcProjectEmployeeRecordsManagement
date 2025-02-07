@@ -7,11 +7,11 @@ namespace EFCoreWithAspDotnetCore.Repositories
 {
     public interface IEmployeeRepository
     {
-        Task<Employee> GetByIdAsync(int id);
+        Task<EmployeeViewModel> GetByIdAsync(int id);
         // Task<List<EmployeeViewModel>> GetAllAsync();
         IQueryable<EmployeeViewModel> GetAllAsync();
         Task AddAsync(EmployeeViewModel employee);
-        Task UpdateAsync(Employee employee);
+        Task UpdateAsync(EmployeeViewModel employee);
         Task DeleteAsync(int id);
 
         Task<List<Department>> GetAllDepartmentsAsync();

@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 
 using EFCoreWithAspDotnetCore.Models;
 using EFCoreWithAspDotnetCore.Repositories;
@@ -98,6 +99,45 @@ namespace EFCoreWithAspDotnetCore.Controllers
             // Add employee to database
             await _employeeRepository.AddAsync(model);
 
+            return RedirectToAction("Index", "Employee");
+        }
+
+        //GET: Employee/Edit
+        [HttpGet]
+        public async Task<IActionResult> Edit(int id) // TODO: Test and pass incorrect id
+        {
+            // Fetch the department details.
+            var departments = await _employeeRepository.GetAllDepartmentsAsync();
+            ViewBag.Departments = new SelectList(departments, "DepartmentId", "Name");
+
+            // Fetch the employee details
+            var employee = await _employeeRepository.GetByIdAsync(id);
+            return View(employee);
+        }
+        //POST: Employee/Edit
+        [HttpPost]
+        public async Task<IActionResult> Edit(EmployeeViewModel employee)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(employee); // Return to the form with validation errors
+            }
+
+            // Update the database with modified details
+            await _employeeRepository.UpdateAsync(employee);
+
+            // Redirect to list off all employees page
+            return RedirectToAction("Index", "Employee");
+        }
+
+        //GET: /Employee/Delete
+        [HttpGet]
+        public async Task<IActionResult> Delete(int id)
+        {
+            // Delete the data from database
+            await _employeeRepository.DeleteAsync(id);
+
+            // Redirect to list off all employees page
             return RedirectToAction("Index", "Employee");
         }
     }
